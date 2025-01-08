@@ -3,12 +3,14 @@ package com.iver.rjproject.service.impl;
 
 import com.iver.rjproject.records.Processor;
 import com.iver.rjproject.service.Generator;
+import com.iver.rjproject.service.MultipleGenerator;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Random;
 
 @Service
-public class ProcessorGenerator implements Generator<Processor> {
+public class ProcessorGenerator implements Generator<Processor>, MultipleGenerator<Processor> {
     private final Random random;
     private final boolean withDelay;
 
@@ -37,5 +39,10 @@ public class ProcessorGenerator implements Generator<Processor> {
 
     private int generateSpeed() {
         return random.nextInt(1000, 7000);
+    }
+
+    @Override
+    public List<Processor> generate(int size) {
+        return List.of();
     }
 }

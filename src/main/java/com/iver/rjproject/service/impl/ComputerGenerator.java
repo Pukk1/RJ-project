@@ -4,6 +4,7 @@ import com.iver.rjproject.records.Computer;
 import com.iver.rjproject.records.MemoryTab;
 import com.iver.rjproject.records.Processor;
 import com.iver.rjproject.service.Generator;
+import com.iver.rjproject.service.MultipleGenerator;
 import enums.OperationSystemName;
 import org.springframework.stereotype.Service;
 
@@ -14,11 +15,11 @@ import java.util.Random;
 @Service
 public class ComputerGenerator implements Generator<Computer> {
 
-    private final Generator<MemoryTab> memoryTabGenerator;
-    private final Generator<Processor> processorGenerator;
+    private final MultipleGenerator<MemoryTab> memoryTabGenerator;
+    private final MultipleGenerator<Processor> processorGenerator;
     private final Random random;
 
-    public ComputerGenerator(Generator<MemoryTab> memoryTabGenerator, Generator<Processor> processorGenerator, Random random) {
+    public ComputerGenerator(MultipleGenerator<MemoryTab> memoryTabGenerator, MultipleGenerator<Processor> processorGenerator, Random random) {
         this.memoryTabGenerator = memoryTabGenerator;
         this.processorGenerator = processorGenerator;
         this.random = random;

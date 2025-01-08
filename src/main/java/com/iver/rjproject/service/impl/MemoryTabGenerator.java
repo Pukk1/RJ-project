@@ -3,10 +3,12 @@ package com.iver.rjproject.service.impl;
 
 import com.iver.rjproject.records.MemoryTab;
 import com.iver.rjproject.service.Generator;
+import com.iver.rjproject.service.MultipleGenerator;
 
+import java.util.List;
 import java.util.Random;
 
-public class MemoryTabGenerator implements Generator<MemoryTab> {
+public class MemoryTabGenerator implements Generator<MemoryTab>, MultipleGenerator<MemoryTab> {
 
     private final Random random;
 
@@ -33,5 +35,11 @@ public class MemoryTabGenerator implements Generator<MemoryTab> {
 
     private int generateSpeed() {
         return 1000 * random.nextInt(1, 8);
+    }
+
+
+    @Override
+    public List<MemoryTab> generate(int size) {
+        return List.of();
     }
 }
