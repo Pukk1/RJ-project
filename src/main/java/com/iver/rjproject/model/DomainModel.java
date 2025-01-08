@@ -10,4 +10,5 @@ import org.springframework.stereotype.Component;
 public class DomainModel {
     private Integer delay;
     private Integer makersCount;
+    private volatile Integer computersCount;
 }
