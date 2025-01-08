@@ -3,9 +3,11 @@ package com.iver.rjproject.service.impl;
 
 import com.iver.rjproject.records.Processor;
 import com.iver.rjproject.service.Generator;
+import org.springframework.stereotype.Service;
 
 import java.util.Random;
 
+@Service
 public class ProcessorGenerator implements Generator<Processor> {
     private final Random random;
     private final boolean withDelay;

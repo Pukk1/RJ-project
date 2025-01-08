@@ -2,7 +2,6 @@ package com.iver.rjproject.service.impl;
 
 import com.iver.rjproject.records.Computer;
 import com.iver.rjproject.records.MemoryTab;
-import com.iver.rjproject.records.Processor;
 import com.iver.rjproject.service.Generator;
 import enums.OperationSystemName;
 
