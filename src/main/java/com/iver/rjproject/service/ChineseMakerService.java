@@ -45,15 +45,20 @@ public class ChineseMakerService implements MakerService {
                 .forEach(it -> Flowable
                         .just(it)
                         .subscribeOn(scheduler)
-                        .doOnNext(el -> System.out.println(Thread.currentThread().getName()))
+//                        .doOnNext(el -> System.out.println(Thread.currentThread().getName()))
                         .subscribe(customSubscriber)
                 );
     }
 
     public void setPoolSize(int size) {
         if (executor != null) {
-            executor.setMaximumPoolSize(size);
-            executor.setCorePoolSize(size);
+            if (executor.getMaximumPoolSize() < size) {
+                executor.setMaximumPoolSize(size);
+                executor.setCorePoolSize(size);
+            } else {
+                executor.setCorePoolSize(size);
+                executor.setMaximumPoolSize(size);
+            }
         } else {
             System.err.println("Пул потоков не инициализирован!");
         }
