@@ -1,6 +1,8 @@
 package com.iver.rjproject.service;
 
-import com.iver.rjproject.model.CPU;
+import com.iver.rjproject.model.DomainModel;
+import com.iver.rjproject.records.MemoryTab;
+import com.iver.rjproject.records.Processor;
 import io.reactivex.rxjava3.core.Flowable;
 import io.reactivex.rxjava3.core.Scheduler;
 import io.reactivex.rxjava3.schedulers.Schedulers;
@@ -15,13 +17,16 @@ public class ChineseMakerService implements MakerService {
 
     private final ThreadPoolExecutor executor;
     private final Scheduler scheduler;
-    private final Flowable<CPU> cpuFlowable;
-    private final CpuGenerator cpuGenerator;
+    private final Flowable<Processor> cpuFlowable;
+    private final ProcessorGenerator processorGenerator;
+    private final Flowable<MemoryTab> memoryTabFlowable;
+    private final DomainModel domainModel;
 
-    public ChineseMakerService(CpuGenerator cpuGenerator) {
-        this.cpuGenerator = cpuGenerator;
+    public ChineseMakerService(ProcessorGenerator processorGenerator, DomainModel domainModel) {
+        this.processorGenerator = processorGenerator;
         this.executor = (ThreadPoolExecutor) Executors.newCachedThreadPool();
         this.scheduler = Schedulers.from(executor);
-        cpuFlowable = Flowable.fromStream(Stream.generate(cpuGenerator::generate));
+        this.domainModel = domainModel;
+        cpuFlowable = Flowable.fromStream(Stream.generate(processorGenerator::generate));
     }
 }
