@@ -6,7 +6,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
@@ -22,7 +22,7 @@ public class ModelController {
         return "index";
     }
 
-    @PatchMapping("/parameters")
+    @PostMapping("/parameters")
     public String updateParameters(
             Model model,
             @RequestParam(required = false) Integer delay,

@@ -6,8 +6,19 @@
 </head>
 <body>
 
-<p>Задержка: <span th:text="${model.getDelay()}"></span></p>
-<p>Скорость производства ПК: <span th:text="${speed}"></span></p>
+<p>Количество произведённых ПК: <span th:text="${model.getComputersCount()}"></span></p>
+
+<form th:action="@{/parameters}" method="post">
+    <label for="delay">Введите задержку (в миллисекундах):</label>
+    <input type="number" id="delay" name="delay" min="0" required th:placeholder="${model.getDelay()}">
+    <button type="submit">Установить</button>
+</form>
+
+<form th:action="@{/parameters}" method="post">
+    <label for="delay">Введите количество сборщиков:</label>
+    <input type="number" id="makers" name="makers" min="1" required th:placeholder="${model.getMakersCount()}">
+    <button type="submit">Установить</button>
+</form>
 
 </body>
 </html>

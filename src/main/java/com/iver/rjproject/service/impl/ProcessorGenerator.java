@@ -6,10 +6,8 @@ import com.iver.rjproject.service.Generator;
 import com.iver.rjproject.service.MultipleGenerator;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-import java.util.stream.IntStream;
 
 @Service
 public class ProcessorGenerator implements Generator<Processor>, MultipleGenerator<Processor> {
@@ -42,12 +40,6 @@ public class ProcessorGenerator implements Generator<Processor>, MultipleGenerat
 
     @Override
     public List<Processor> generate(int size) {
-        var processors = new ArrayList<Processor>();
-
-        IntStream.range(0, size).forEach(it -> {
-            processors.add(generateProcessor());
-        });
-
-        return processors;
+        return List.of();
     }
 }

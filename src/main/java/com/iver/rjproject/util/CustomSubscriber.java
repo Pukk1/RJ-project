@@ -1,6 +1,5 @@
 package com.iver.rjproject.util;
 
-import com.iver.rjproject.model.DomainModel;
 import com.iver.rjproject.records.Computer;
 import com.iver.rjproject.records.Processor;
 import io.reactivex.rxjava3.annotations.NonNull;
@@ -19,11 +18,6 @@ public class CustomSubscriber implements FlowableSubscriber<Computer> {
     @Getter
     private Map<Integer, Long> results;
     private Subscription subscription;
-    private final DomainModel domainModel;
-
-    public CustomSubscriber(DomainModel domainModel) {
-        this.domainModel = domainModel;
-    }
 
     @Override
     public void onSubscribe(@NonNull Subscription s) {
@@ -34,7 +28,6 @@ public class CustomSubscriber implements FlowableSubscriber<Computer> {
 
     @Override
     public void onNext(Computer computer) {
-        domainModel.setComputersCount(domainModel.getComputersCount() + 1);
         var coreNumber = computer.processor().coreNumber();
         var valueByCoreNumber = results.getOrDefault(coreNumber, 0L);
         valueByCoreNumber++;
