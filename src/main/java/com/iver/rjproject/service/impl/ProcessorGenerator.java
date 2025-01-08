@@ -12,11 +12,9 @@ import java.util.Random;
 @Service
 public class ProcessorGenerator implements Generator<Processor>, MultipleGenerator<Processor> {
     private final Random random;
-    private final boolean withDelay;
 
-    public ProcessorGenerator(Random random, boolean withDelay) {
+    public ProcessorGenerator(Random random) {
         this.random = random;
-        this.withDelay = withDelay;
     }
 
     @Override
@@ -27,8 +25,7 @@ public class ProcessorGenerator implements Generator<Processor>, MultipleGenerat
     private Processor generateProcessor() {
         return new Processor(
                 generateCoreNumbers(),
-                generateSpeed(),
-                withDelay
+                generateSpeed()
         );
     }
 
