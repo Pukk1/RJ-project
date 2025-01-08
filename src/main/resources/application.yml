@@ -3,6 +3,5 @@ spring:
     name: RJ-project
 
 config:
-  cpuGenerationSpeed: 1000
-  pcGenerationSpeed: 1000
   makersCount: 1
+  computersCount: 0

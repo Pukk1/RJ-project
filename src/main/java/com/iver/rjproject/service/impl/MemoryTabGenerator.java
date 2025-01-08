@@ -6,8 +6,10 @@ import com.iver.rjproject.service.Generator;
 import com.iver.rjproject.service.MultipleGenerator;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.stream.IntStream;
 
 @Service
 public class MemoryTabGenerator implements Generator<MemoryTab>, MultipleGenerator<MemoryTab> {
@@ -42,6 +44,12 @@ public class MemoryTabGenerator implements Generator<MemoryTab>, MultipleGenerat
 
     @Override
     public List<MemoryTab> generate(int size) {
-        return List.of();
+        var memTabs = new ArrayList<MemoryTab>();
+
+        IntStream.range(0, size).forEach(it -> {
+            memTabs.add(generateMemoryTab());
+        });
+
+        return memTabs;
     }
 }
