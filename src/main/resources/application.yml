@@ -1,1 +1,8 @@
-spring.application.name=RJ-project
+spring:
+  application:
+    name: RJ-project
+
+config:
+  cpuGenerationSpeed: 1000
+  pcGenerationSpeed: 1000
+  makersCount: 1
