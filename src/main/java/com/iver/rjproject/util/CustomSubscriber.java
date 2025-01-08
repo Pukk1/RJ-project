@@ -1,5 +1,6 @@
 package com.iver.rjproject.util;
 
+import com.iver.rjproject.records.Computer;
 import com.iver.rjproject.records.Processor;
 import io.reactivex.rxjava3.annotations.NonNull;
 import io.reactivex.rxjava3.core.FlowableSubscriber;
@@ -11,7 +12,7 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 @Service
-public class CustomSubscriber implements FlowableSubscriber<Processor> {
+public class CustomSubscriber implements FlowableSubscriber<Computer> {
 
     private final long BUFFER_SIZE = 10L;
     @Getter
@@ -26,7 +27,7 @@ public class CustomSubscriber implements FlowableSubscriber<Processor> {
     }
 
     @Override
-    public void onNext(Processor computer) {
+    public void onNext(Computer computer) {
         var coreNumber = computer.processor().coreNumber();
         var valueByCoreNumber = results.getOrDefault(coreNumber, 0L);
         valueByCoreNumber++;

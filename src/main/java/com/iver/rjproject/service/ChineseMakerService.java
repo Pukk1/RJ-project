@@ -1,8 +1,7 @@
 package com.iver.rjproject.service;
 
 import com.iver.rjproject.model.DomainModel;
-import com.iver.rjproject.records.Processor;
-import com.iver.rjproject.service.impl.ProcessorGenerator;
+import com.iver.rjproject.records.Computer;
 import com.iver.rjproject.util.CustomSubscriber;
 import io.reactivex.rxjava3.core.BackpressureStrategy;
 import io.reactivex.rxjava3.core.Flowable;
@@ -18,25 +17,41 @@ import java.util.stream.Stream;
 @Service
 public class ChineseMakerService implements MakerService {
 
-    private final ThreadPoolExecutor cpuExecutor;
-    private final Scheduler cpuScheduler;
-    private final Flowable<Processor> processorFlowable;
-    private final Generator<Processor> processorGenerator;
-//    private final Flowable<MemoryTab> memoryTabFlowable;
+    private final ThreadPoolExecutor executor;
+    private final Scheduler scheduler;
+    private final Flowable<Computer> flowable;
+    private final Generator<Computer> generator;
     private final DomainModel domainModel;
     private final CustomSubscriber customSubscriber;
 
-    public ChineseMakerService(Generator<Processor> processorGenerator, DomainModel domainModel, CustomSubscriber customSubscriber) {
-        this.processorGenerator = processorGenerator;
+    public ChineseMakerService(Generator<Computer> generator, DomainModel domainModel, CustomSubscriber customSubscriber) {
+        this.generator = generator;
         this.customSubscriber = customSubscriber;
         this.domainModel = domainModel;
 
-        this.cpuExecutor = (ThreadPoolExecutor) Executors.newCachedThreadPool();
-        this.cpuScheduler = Schedulers.from(cpuExecutor);
+        this.executor = (ThreadPoolExecutor) Executors.newCachedThreadPool();
+        this.scheduler = Schedulers.from(executor);
 
-        processorFlowable = Observable.fromStream(Stream.generate(processorGenerator::generate)).toFlowable(BackpressureStrategy.BUFFER);
-        processorFlowable
-                .observeOn(cpuScheduler)
+        flowable = Observable.fromStream(Stream.generate(generator::generate)).toFlowable(BackpressureStrategy.BUFFER);
+        flowable
+                .observeOn(scheduler)
                 .subscribe(customSubscriber);
     }
+
+    public void setMainTeamMakersCount(int size) {
+        if (executor != null) {
+            executor.setCorePoolSize(size);
+        } else {
+            System.err.println("Пул потоков не инициализирован!");
+        }
+    }
+    
+    public void setAdditionalTeamMakersCount(int size) {
+        if (executor != null) {
+            executor.setMaximumPoolSize(size);
+        } else {
+            System.err.println("Пул потоков не инициализирован!");
+        }
+    }
+
 }
