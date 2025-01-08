@@ -1,6 +1,7 @@
 package com.iver.rjproject.controller;
 
 import com.iver.rjproject.model.DomainModel;
+import com.iver.rjproject.service.ChineseMakerService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class ModelController {
 
     private final DomainModel domainModel;
+    private final ChineseMakerService service;
 
     @GetMapping
     public String index(Model model) {
@@ -21,13 +23,14 @@ public class ModelController {
     }
 
     @PatchMapping("/parameters")
-    public String index(
+    public String updateParameters(
             Model model,
             @RequestParam(required = false) Integer delay,
             @RequestParam(required = false) Integer makersCount
     ) {
         domainModel.setDelay(delay);
         domainModel.setMakersCount(makersCount);
+        service.setPoolSize(domainModel.getMakersCount());
         model.addAttribute("model", domainModel);
         return "index";
     }

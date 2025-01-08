@@ -38,20 +38,12 @@ public class ChineseMakerService implements MakerService {
                 .subscribe(customSubscriber);
     }
 
-    public void setMainTeamMakersCount(int size) {
+    public void setPoolSize(int size) {
         if (executor != null) {
             executor.setCorePoolSize(size);
-        } else {
-            System.err.println("Пул потоков не инициализирован!");
-        }
-    }
-    
-    public void setAdditionalTeamMakersCount(int size) {
-        if (executor != null) {
             executor.setMaximumPoolSize(size);
         } else {
             System.err.println("Пул потоков не инициализирован!");
         }
     }
-
 }
