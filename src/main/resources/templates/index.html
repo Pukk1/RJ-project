@@ -6,9 +6,8 @@
 </head>
 <body>
 
-<p>Скорость производства CPU: <span th:text="${model.cpuGenerationSpeed}"></span></p>
-<p>Скорость производства ПК: <span th:text="${model.pcGenerationSpeed}"></span></p>
-<p>Количество производителей: <span th:text="${model.makersCount}"></span></p>
+<p>Задержка: <span th:text="${model.getDelay()}"></span></p>
+<p>Скорость производства ПК: <span th:text="${speed}"></span></p>
 
 </body>
 </html>

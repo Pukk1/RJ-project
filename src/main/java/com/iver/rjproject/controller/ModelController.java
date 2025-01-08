@@ -23,12 +23,10 @@ public class ModelController {
     @PatchMapping("/parameters")
     public String index(
             Model model,
-            @RequestParam(required = false) Integer cpuGenerationSpeed,
-            @RequestParam(required = false) Integer pcGenerationSpeed,
+            @RequestParam(required = false) Integer delay,
             @RequestParam(required = false) Integer makersCount
     ) {
-        domainModel.setCpuGenerationSpeed(cpuGenerationSpeed);
-        domainModel.setPcGenerationSpeed(pcGenerationSpeed);
+        domainModel.setDelay(delay);
         domainModel.setMakersCount(makersCount);
         model.addAttribute("model", domainModel);
         return "index";
