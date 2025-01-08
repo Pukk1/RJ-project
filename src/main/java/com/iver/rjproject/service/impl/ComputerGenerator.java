@@ -25,12 +25,8 @@ public class ComputerGenerator implements Generator<Computer> {
 
     @Override
     public Computer generate() {
-        int delay = 0;
-        if (domainModel.getDelay() != null) {
-            delay = domainModel.getDelay();
-        }
         try {
-            Thread.sleep(0, delay);
+            Thread.sleep(0, domainModel.getDelay());
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }

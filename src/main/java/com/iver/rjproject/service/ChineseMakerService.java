@@ -22,7 +22,7 @@ public class ChineseMakerService implements MakerService {
     private final Flowable<Computer> flowable;
 
     public ChineseMakerService(Generator<Computer> generator, CustomSubscriber customSubscriber, DomainModel domainModel) {
-        this.executor = (ThreadPoolExecutor) Executors.newCachedThreadPool();
+        this.executor = (ThreadPoolExecutor) Executors.newFixedThreadPool(domainModel.getMakersCount());
         this.scheduler = Schedulers.from(executor);
 
         flowable = Flowable.generate(emitter -> {
@@ -31,8 +31,12 @@ public class ChineseMakerService implements MakerService {
         });
 //        flowable = Observable.fromStream(Stream.generate(generator::generate)).toFlowable(BackpressureStrategy.BUFFER);
         flowable
-                .subscribeOn(scheduler)
-                .subscribe(customSubscriber);
+                .forEach(it -> Flowable
+                        .just(it)
+                        .subscribeOn(scheduler)
+                        .doOnNext(el -> System.out.println(Thread.currentThread().getName()))
+                        .subscribe(customSubscriber)
+                );
 
         executor.setCorePoolSize(domainModel.getMakersCount());
         executor.setMaximumPoolSize(domainModel.getMakersCount());

@@ -5,3 +5,4 @@ spring:
 config:
   makersCount: 1
   computersCount: 0
+  delay: 0
