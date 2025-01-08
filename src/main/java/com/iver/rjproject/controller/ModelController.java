@@ -14,7 +14,7 @@ public class ModelController {
 
     private final DomainModel domainModel;
 
-    @GetMapping("/")
+    @GetMapping
     public String index(Model model) {
         model.addAttribute("model", domainModel);
         return "index";

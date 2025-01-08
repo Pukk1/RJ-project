@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 @Data
 @Component
 public class DomainModel {
-    private int cpuGenerationSpeed;
-    private int pcGenerationSpeed;
-    private int makersCount;
+    private Integer cpuGenerationSpeed;
+    private Integer pcGenerationSpeed;
+    private Integer makersCount;
 }

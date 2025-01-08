@@ -2,16 +2,13 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Создание источника данных</title>
+    <title>Domain Model Information</title>
 </head>
 <body>
-<h1>Пример приложения с Thymeleaf</h1>
 
-<p th:if="${additionalDataSourceCreated}">Дополнительный источник данных был успешно создан!</p>
-<p th:unless="${additionalDataSourceCreated}">Дополнительный источник данных еще не создан.</p>
+<p>Скорость производства CPU: <span th:text="${model.cpuGenerationSpeed}"></span></p>
+<p>Скорость производства ПК: <span th:text="${model.pcGenerationSpeed}"></span></p>
+<p>Количество производителей: <span th:text="${model.makersCount}"></span></p>
 
-<form action="/create-source" method="get">
-    <button type="submit">Создать дополнительный источник данных</button>
-</form>
 </body>
 </html>
