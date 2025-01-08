@@ -4,10 +4,12 @@ package com.iver.rjproject.service.impl;
 import com.iver.rjproject.records.MemoryTab;
 import com.iver.rjproject.service.Generator;
 import com.iver.rjproject.service.MultipleGenerator;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Random;
 
+@Service
 public class MemoryTabGenerator implements Generator<MemoryTab>, MultipleGenerator<MemoryTab> {
 
     private final Random random;
