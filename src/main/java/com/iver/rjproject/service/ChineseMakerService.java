@@ -3,6 +3,7 @@ package com.iver.rjproject.service;
 import com.iver.rjproject.model.DomainModel;
 import com.iver.rjproject.records.MemoryTab;
 import com.iver.rjproject.records.Processor;
+import com.iver.rjproject.service.impl.ProcessorGenerator;
 import io.reactivex.rxjava3.core.Flowable;
 import io.reactivex.rxjava3.core.Scheduler;
 import io.reactivex.rxjava3.schedulers.Schedulers;
@@ -17,8 +18,8 @@ public class ChineseMakerService implements MakerService {
 
     private final ThreadPoolExecutor executor;
     private final Scheduler scheduler;
+    private final Generator<Processor> processorGenerator;
     private final Flowable<Processor> cpuFlowable;
-    private final ProcessorGenerator processorGenerator;
     private final Flowable<MemoryTab> memoryTabFlowable;
     private final DomainModel domainModel;
 
