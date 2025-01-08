@@ -26,12 +26,16 @@ public class ModelController {
     public String updateParameters(
             Model model,
             @RequestParam(required = false) Integer delay,
-            @RequestParam(required = false) Integer makersCount
+            @RequestParam(required = false) Integer makers
     ) {
-        domainModel.setDelay(delay);
-        domainModel.setMakersCount(makersCount);
-        service.setPoolSize(domainModel.getMakersCount());
+        if (delay != null) {
+            domainModel.setDelay(delay);
+        }
+        if (makers != null) {
+            domainModel.setMakersCount(makers);
+            service.setPoolSize(domainModel.getMakersCount());
+        }
         model.addAttribute("model", domainModel);
-        return "index";
+        return "redirect:/";
     }
 }
