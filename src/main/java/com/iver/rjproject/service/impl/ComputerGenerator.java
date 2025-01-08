@@ -1,11 +1,13 @@
 package com.iver.rjproject.service.impl;
 
+import com.iver.rjproject.model.DomainModel;
 import com.iver.rjproject.records.Computer;
 import com.iver.rjproject.records.MemoryTab;
 import com.iver.rjproject.records.Processor;
 import com.iver.rjproject.service.Generator;
 import com.iver.rjproject.service.MultipleGenerator;
 import enums.OperationSystemName;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -13,20 +15,25 @@ import java.util.List;
 import java.util.Random;
 
 @Service
+@RequiredArgsConstructor
 public class ComputerGenerator implements Generator<Computer> {
 
     private final MultipleGenerator<MemoryTab> memoryTabGenerator;
     private final MultipleGenerator<Processor> processorGenerator;
     private final Random random;
-
-    public ComputerGenerator(MultipleGenerator<MemoryTab> memoryTabGenerator, MultipleGenerator<Processor> processorGenerator, Random random) {
-        this.memoryTabGenerator = memoryTabGenerator;
-        this.processorGenerator = processorGenerator;
-        this.random = random;
-    }
+    private final DomainModel domainModel;
 
     @Override
     public Computer generate() {
+        int delay = 0;
+        if (domainModel.getDelay() != null) {
+            delay = domainModel.getDelay();
+        }
+        try {
+            Thread.sleep(0, delay);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
         return generateComputer();
     }
 
